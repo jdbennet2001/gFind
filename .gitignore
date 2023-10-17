@@ -3,3 +3,7 @@
 
 # Cached data
 *.csv
+
+#Binaries
+gFind
+main

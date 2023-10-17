@@ -1,9 +1,9 @@
 package data
 
 import (
-"cacheGrep/defs"
+	"gFind/defs"
 "encoding/csv"
-	"fmt"
+
 	"log"
 "os"
 	"path/filepath"
@@ -61,8 +61,7 @@ func ReadCSV(tgtPath string) []defs.FileInfo{
 	defer f.Close()
 
 	//Read the header
-	header, _ := csvReader.Read()
-	fmt.Println("Header rows are: ", header)
+	csvReader.Read()
 
 	// Read data
 	rows, _ := csvReader.ReadAll()

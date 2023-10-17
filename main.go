@@ -1,22 +1,19 @@
 package main
 
 import (
-	"cacheGrep/data"
-	"cacheGrep/defs"
 	"errors"
 	"flag"
 	"fmt"
+	"gFind/data"
+	"gFind/defs"
 	"os"
 	"path/filepath"
 	"strings"
 )
 
-const sourceDir = "/Volumes/SMALLDASD/comics"
-
-
 /*
  Version of find that uses a cached CSV file to map network drives for fast scanning
- Usage: cacheGrep -dir=string -refresh=bool*  [string]
+ Usage: gFine -dir=string -refresh=bool*  [string]
  */
 func main() {
 
@@ -34,7 +31,7 @@ func main() {
 
 	// Input parameters
 	if *tgtDirectoryPtr == "default" || len(searchTokens) == 0{
-		fmt.Println("Usage: cacheGrep -dir=[string] -refresh=[bool]* [searchTokens]")
+		fmt.Println("Usage: gFine -dir=[string] -refresh=[bool]* [searchTokens]")
 		return
 	}
 
@@ -44,12 +41,12 @@ func main() {
 	// Need to refresh.. go for it..
 	if *refreshPtr == true || !data.HasCSV(*tgtDirectoryPtr) {
 		fmt.Println("Scanning input directory")
-		files, err := Walk(sourceDir, 32 * 1024)
+		files, err := Walk(*tgtDirectoryPtr, 32 * 1024)
 		if err != nil {
 			fmt.Println("Input directory not reachable: ", *tgtDirectoryPtr)
 			return
 		}
-		data.WriteCSV(files, sourceDir)
+		data.WriteCSV(files, *tgtDirectoryPtr)
 	}
 
 	// Load data
