@@ -15,7 +15,9 @@ go build -o gFind
 Usage:
 
 ```shell
-./gFind -dir=[string] -refresh=[bool] [search_tokens]
+./gFind -dir=[string] -refresh=[bool]* -minSize=[int64]* [search_tokens]
+
+* - optional
 ```
 
 Example:

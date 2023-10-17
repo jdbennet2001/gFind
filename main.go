@@ -20,6 +20,7 @@ func main() {
 	// Define command line flags
 	tgtDirectoryPtr := flag.String("dir", "default", "a string")
 	refreshPtr := flag.Bool("refresh", false, "a bool")
+	minSizePtr := flag.Int64("minSize", 32*1024, "an int64")
 
 	// Parse the command line flags
 	flag.Parse()
@@ -41,7 +42,7 @@ func main() {
 	// Need to refresh.. go for it..
 	if *refreshPtr == true || !data.HasCSV(*tgtDirectoryPtr) {
 		fmt.Println("Scanning input directory")
-		files, err := Walk(*tgtDirectoryPtr, 32 * 1024)
+		files, err := Walk(*tgtDirectoryPtr, *minSizePtr)
 		if err != nil {
 			fmt.Println("Input directory not reachable: ", *tgtDirectoryPtr)
 			return
