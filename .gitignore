@@ -1,0 +1,5 @@
+# Tool files
+.idea
+
+# Cached data
+*.csv
